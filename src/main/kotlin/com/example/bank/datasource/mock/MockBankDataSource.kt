@@ -32,4 +32,11 @@ class MockBankDataSource : BankDataSource {
 
         return bank
     }
+
+    override fun deleteBank(accountNumber: String) {
+        if (!banks.any {it.accountNumber == accountNumber}) {
+            throw NoSuchElementException("Could not find the bank with account number = $accountNumber")
+        }
+        banks.removeIf {it.accountNumber == accountNumber}
+    }
 }
